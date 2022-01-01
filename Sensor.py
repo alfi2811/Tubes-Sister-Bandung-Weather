@@ -2,12 +2,10 @@
 import paho.mqtt.client as mqtt
 # import time untuk sleep()
 import time
-
 import datetime
-
 import random as rand
-
 import json
+import uuid
 
 
 # buat callback on_publish untuk publish data
@@ -39,32 +37,35 @@ Sensor3.connect(broker_address,port=1883)
 while True:
   
   # client melakukan publish data dengan topik "waktu"
-
+  uuidNum = uuid.uuid1()
   msg1 = rand.randint(15,30)
   print("Publishing message to topic", "Suhu1")
   waktu1 = datetime.datetime.now()
   Sensor1.publish("Suhu1",json.dumps({
-    "Device_Name":"Sensor 1",
-    "Date":waktu1.strftime("%m/%d/%Y, %H:%M:%S"),
-    "Suhu":msg1
+    "id": str(uuidNum),
+    "device_name":"Sensor 1",
+    "date":waktu1.strftime("%m/%d/%Y, %H:%M:%S"),
+    "suhu":msg1
   })  )
   
   msg2 = rand.randint(15,30)
   print("Publishing message to topic", "Suhu2")
   waktu2 = datetime.datetime.now()
   Sensor2.publish("Suhu2", json.dumps({
-    "Device_Name":"Sensor 2",
-    "Date":waktu2.strftime("%m/%d/%Y, %H:%M:%S"),
-    "Suhu":msg2
+    "id": str(uuidNum),
+    "device_name":"Sensor 2",
+    "date":waktu2.strftime("%m/%d/%Y, %H:%M:%S"),
+    "suhu":msg2
   }) )
 
   msg3 = rand.randint(15,30)
   print("Publishing message to topic", "Suhu3")
   waktu3 = datetime.datetime.now()
   Sensor3.publish("Suhu3",json.dumps({
-    "Device_Name":"Sensor 3",
-    "Date":waktu3.strftime("%m/%d/%Y, %H:%M:%S"),
-    "Suhu":msg3
+    "id": str(uuidNum),
+    "device_name":"Sensor 3",
+    "date":waktu3.strftime("%m/%d/%Y, %H:%M:%S"),
+    "suhu":msg3
   }) )
 
   time.sleep(10)
