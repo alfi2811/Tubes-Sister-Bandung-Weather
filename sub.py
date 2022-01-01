@@ -10,28 +10,20 @@ def on_message(client, userdata, message):
     print("message data received,", str(message.payload.decode("utf-8")))
     pass
     
-########################################
-    
-# buat definisi nama broker yang akan digunakan
-broker_address = "localhost"
-# buat client baru bernama P1
+broker_address = "broker.emqx.io"
 print("creating new instance")
 client = mqtt.Client("P1")
-# kaitkan callback on_message ke client
+
 client.on_message = on_message
-# buat koneksi ke broker
-print("connecting to broker")
-client.connect(broker_address, port=8000)
-# jalankan loop client
+
+client.connect(broker_address, port=1883)
 client.loop_start()
 
-# print topik yang disubscribe (dalam konteks ini, "waktu")
 print("Subscribing to topic:", "waktu")
-# loop forever
-while True:
-    # client melakukan subscribe ke topik "waktu"
-    client.subscribe("waktu")
-    # berikan waktu tunggu 1 detik 
+while True:    
+    client.subscribe("Suhu1")
+    client.subscribe("Suhu2")
+    client.subscribe("Suhu3")    
     time.sleep(1)
        
 #stop loop
