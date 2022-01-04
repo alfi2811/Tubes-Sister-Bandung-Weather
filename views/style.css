@@ -9,7 +9,7 @@ h1, h3, h4, h5, p {
 .container {
   width: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(#6e3f98 9%,#d6ab97);
+  background-image: linear-gradient(#5255c2 9%,#d8845c);
   display: flex;
   align-items: center;
   flex-direction: column;  
@@ -57,7 +57,7 @@ tbody {
 }
 
 .card-rangkum .thumbnail {
-  width: 90px;  
+  width: 120px;  
 }
 
 .card-rangkum .thumbnail img {

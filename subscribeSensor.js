@@ -83,9 +83,21 @@ function getWeatherNow(id) {
   return Math.floor(weatherList[id].total / weatherList[id].count)
 }
 
-function viewUpdate(id){        
-  document.getElementById('avg-now').innerHTML = getAvg() + " degree";
-  document.getElementById('avg-all').innerHTML = getWeatherNow(id) + " degree";
+function getImgCloud(id) {
+  var searchPic = document.getElementById('img-icon');
+  if(getWeatherNow(id) > 27) {
+    searchPic.src = "../assets/sunny.png";
+  } else if (getWeatherNow(id) > 20) {
+    searchPic.src = "../assets/cloudy.png";
+  } else {
+    searchPic.src = "../assets/rainy.png";
+  }  
+}
+
+function viewUpdate(id){
+  getImgCloud(id);
+  document.getElementById('avg-now').innerHTML = getWeatherNow(id) + " &#8451;";
+  document.getElementById('avg-all').innerHTML = getAvg() + " &#8451;";
   document.getElementById('total-data').innerHTML = Object.keys(weatherList).length;
   
   // console.log("Rata-rata keseluruhan suhu: ", getAvg() + " degree")
