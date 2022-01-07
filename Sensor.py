@@ -33,10 +33,9 @@ print("connecting to broker")
 Sensor1.connect(broker_address,port=1883)
 Sensor2.connect(broker_address,port=1883)
 Sensor3.connect(broker_address,port=1883)
-# lakukan 20x publish waktu dengan topik "waktu"
+
 while True:
   
-  # client melakukan publish data dengan topik "waktu"
   uuidNum = uuid.uuid1()
   msg1 = rand.randint(15,30)
   print("Publishing message to topic", "Suhu1")
