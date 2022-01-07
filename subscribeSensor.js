@@ -19,23 +19,20 @@ client.on('connect', () => {
 
 client.on('message', function (topic, message) {
   data = JSON.parse(message)
-  console.log(`${data.device_name} ${data.date} Suhu ${data.suhu}`)          
+  
   const tableref = document.getElementById('sensor-data').getElementsByTagName('tbody')[0];      
-  const tablerow = tableref.insertRow(0)      
-  // tablerow.className = 'fade-in'
+  const tablerow = tableref.insertRow(0)
   tablerow.innerHTML = `<tr class=fade-in> <td>${data.date}</td> <td>${data.id}</td><td>${data.device_name}</td> <td>${data.suhu}</td> </tr>`  
   updateWeather(data);
 })
 function updateWeather(data){  
   if(weatherList[data.id] != null){
     weatherList[data.id].total += data.suhu
-    weatherList[data.id].count++
-    if(weatherList[data.id].count == 3){
-      var mydate = new Date(data.date);
-      console.log(mydate.toLocaleTimeString());
-      document.getElementById('time-now').innerHTML = mydate.toLocaleTimeString();
-      viewUpdate(data.id)
-    }
+    weatherList[data.id].count++    
+    var mydate = new Date(data.date);
+    console.log(mydate.toLocaleTimeString());
+    document.getElementById('time-now').innerHTML = mydate.toLocaleTimeString();
+    viewUpdate(data.id)    
   } else{
       weatherList[data.id] = {total:0,count:0}
       weatherList[data.id].total += data.suhu
